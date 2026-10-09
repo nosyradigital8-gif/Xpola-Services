@@ -7,9 +7,82 @@ Latest handover commit: `4423e24`
 
 ## What this repository contains
 
-This repository contains the PHP backend/API used by the Xpola Services website. It is deployed separately from the React frontend and connects the website to the database, authentication, orders, payments, emails, customer accounts, admin tools, maintenance mode, projects, and stock notifications.
+This repository contains the Xpola Services web platform: the React frontend and the PHP backend/API used by it. The frontend is the customer-facing website and private admin dashboard. The API is deployed separately and connects the interface to the database, authentication, orders, payments, emails, customer accounts, maintenance mode, projects, and stock notifications.
 
-The backend files are located in the [`api/`](api/) directory.
+The backend files are located in the [`api/`](api/) directory. The frontend source is located in [`src/`](src/) and is built into the deployable [`dist/`](dist/) folder.
+
+## What the frontend platform does
+
+The frontend is the visual website that customers, visitors, staff, and administrators use. It is responsive for phones, tablets, and desktop screens and uses the Xpola red, black, white, and neutral-grey brand direction.
+
+### Public website
+
+The public platform includes:
+
+- Home page with country-aware messaging and sector navigation.
+- About page with company information and market-specific content.
+- Services page with Nigeria and Canada service categories.
+- Image-led service-detail pages for every published sector.
+- Contact page with country-specific contact details and enquiry form.
+- Legal pages including privacy and terms information.
+- Responsive navigation, country selector, footer, and location notice.
+
+### Nigeria and Canada country experience
+
+The country selector changes the visitor’s market context, including:
+
+- Service descriptions and sector links.
+- Contact email, telephone, office hours, and location.
+- Currency, delivery, shop, and payment context.
+- Country-specific home, service, about, and contact content.
+
+The Canada information and services experience remains available. The Canada marketplace and checkout are intentionally disabled until Moneris setup and launch testing are approved.
+
+### Nigerian marketplace
+
+The Nigerian shop frontend provides:
+
+- Product browsing, categories, filters, product details, cart, and wishlist.
+- Delivery-area selection and coupon entry.
+- Customer account registration and sign-in before checkout.
+- Paystack checkout and order-success flow.
+- Order history, status visibility, and customer support routes.
+- Restock-request opt-in from the wishlist.
+
+The frontend displays payment and order information from the API; it does not replace server-side Paystack verification.
+
+### Customer account
+
+Signed-in customers can access the features enabled by the API, including account summary, orders, wishlist, loyalty, referrals, addresses, notifications, profile management, and support.
+
+### Admin dashboard
+
+The private admin area is the staff control room. Depending on the account permissions and deployed API, staff can manage:
+
+- Products, categories, prices, stock, images, and featured items.
+- Orders, payment status, delivery status, country, and date filters.
+- Customers, support tickets, coupons, delivery settings, and banners.
+- Approved projects and public project visibility.
+- Low-stock, out-of-stock, and customer restock-request notifications.
+- Staff-triggered restock emails.
+- Maintenance mode and the public maintenance notice.
+- Audit/activity information and operational settings.
+
+Admin routes are kept available when public maintenance mode is enabled so staff can complete the maintenance task and switch the site back on.
+
+## Frontend deployment
+
+The frontend is built separately from the PHP API:
+
+1. Install the Node dependencies with `npm install`.
+2. Set the frontend API base URL in the project environment configuration.
+3. Run `npm run build`.
+4. Upload the generated `dist/` contents to the website hosting directory.
+5. Configure the host to serve `index.html` for frontend routes so direct links such as `/nigeria/services/consulting` work correctly.
+6. Confirm the deployed frontend can reach the HTTPS API URL and that CORS allows the website domain.
+7. Test both Nigeria and Canada country routes in a private browser window.
+
+The frontend does not contain production database credentials or payment secrets. Those belong in the protected backend/hosting configuration.
 
 ## Client-friendly overview
 
